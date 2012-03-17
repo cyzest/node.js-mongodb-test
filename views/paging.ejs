@@ -1,0 +1,77 @@
+<%
+	var pageRange = 10;
+
+	if (pageNo!=0 && pageSize!=0 && totalCount!=0) {
+		
+		var totalPage = parseInt(totalCount/pageSize);
+		totalPage = (totalCount%pageSize != 0) ? totalPage+1 : totalPage;
+
+		var firstPage = ((pageNo%pageRange)==0) ? pageNo-(pageRange-1) : ((parseInt(pageNo/pageRange))*pageRange)+1;
+		var endPage = firstPage+pageRange;
+
+		if (pageNo > 1) {
+%>
+			<a href="javascript:goPage(1);" class="first">&lt;&lt;</a>&nbsp;
+<%
+		}else{
+%>
+			&lt;&lt;&nbsp;
+<%
+		}
+
+		if (pageNo > pageRange) {
+			var prevPageNo = pageNo-pageRange;
+			prevPageNo = ((prevPageNo%pageRange)==0) ? prevPageNo-(pageRange-1) : ((parseInt(prevPageNo/pageRange))*pageRange)+1;
+%>
+			<a href="javascript:goPage(<%= prevPageNo %>);" class="prev">&lt;</a>&nbsp;
+<%
+		}else{
+%>
+			&lt;&nbsp;
+<%
+		}
+
+%>
+			<span class="pages">
+<%
+		for (var i = firstPage; i < endPage && i <= totalPage; i++) {
+			if (i == pageNo) {
+%>
+				<em><%= i %></em>
+<%
+			} else {
+%>
+				<a href="javascript:goPage(<%= i %>);"><%= i %></a>
+<%
+			}
+		}
+%>
+			</span>
+<%
+		var nextPageNo = pageNo+pageRange;
+		nextPageNo = ((nextPageNo%pageRange)==0) ? nextPageNo-(pageRange-1) : ((parseInt(nextPageNo/pageRange))*pageRange)+1;
+		if (nextPageNo <= totalPage) {
+%>
+			&nbsp;<a href="javascript:goPage(<%= nextPageNo %>);" class="next">&gt;</a>
+<%
+		}else{
+%>
+			&nbsp;&gt;
+<%
+		}
+
+		if (totalPage > pageNo) {
+%>
+		&nbsp;<a href="javascript:goPage(<%= totalPage %>);" class="last">&gt;&gt;</a>
+<%
+		}else{
+%>
+			&nbsp;&gt;&gt;
+<%
+		}
+	}else{
+%>
+	<span class="pages"></span>
+<%
+	}
+%>

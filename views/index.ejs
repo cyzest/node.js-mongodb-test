@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>Node.js MongoDB Test</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+        	
+			$(document).ready(function(){
+				
+				$("#addMessage").click(function(){
+					
+					var formData = $("form").serialize();
+					
+					$.ajax({
+						url : "/add",
+						type : "POST",
+						data : formData,
+						cache : false,
+						success: function(data){
+							/*
+							$("#totalCount").empty().append(data.totalCount);
+							$("ul").empty();
+							var appendString = "";
+							$.each(data.messages, function(){
+								appendString += '<li>'+'userId:['+this.userId+']'+', message:['+this.message+']'+'</li>';
+							});
+							$("ul").append(appendString);
+							*/
+							location.href = "/";
+						},
+						error : function(xhr, status, error){
+							alert(error);
+						}
+					});
+				});
+				
+			});
+
+			function goPage(pageNo){
+				location.href = "/?pageNo="+pageNo;
+			}
+			
+		</script>
+	</head>
+	<body>
+		<header>
+			<hgroup>
+				<h1>Node.js MongoDB Test</h1>
+				<h2>Node.js 0.6.9 with Mongoose 2.5.2 based.</h2>
+			</hgroup>
+		</header>
+		<article>
+			<section>
+				<p>total message : <span id="totalCount"><%= totalCount %></span></p>
+				<ul>
+				<% for(var i=0; i<messages.length; i++){ %>
+					<li>userId:[<%= messages[i].userId %>], message:[<%= messages[i].message %>]</li>
+				<% } %>
+				</ul>
+				<%- partial('paging.ejs') %>
+				<form>
+					userId : <input type="text" name="userId" />
+					message : <input type="text" name="message" />
+					<a id="addMessage" href="#">add</a>
+				</form>
+			</section>
+		</article>
+		<footer>
+			<p>powered by cyzest</p>
+		</footer>
+	</body>
+</html>

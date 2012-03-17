@@ -1,0 +1,32 @@
+body {
+        margin: 0px auto;
+}
+
+header {
+        text-align: center;
+}
+
+header h1 {
+        font-size: 36px; margin: 0px;
+}
+
+header h2 {
+        font-size: 18px; margin: 0px; color: #888;
+        font-style: italic;
+}
+
+article {
+        text-align: center;
+}
+
+article form {
+	padding: 10px;
+}
+
+footer {
+        text-align: center;
+}
+
+footer p {
+        font-size: 12px; margin: 0px; color: #888;
+}
