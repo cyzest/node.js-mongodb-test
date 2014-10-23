@@ -1,3 +1,3 @@
 exports = mongoose = require('mongoose');
-mongoose.connect('mongodb://id:pw@ds029787.mongolab.com:29787/node-mongo-test-db');
+mongoose.connect('mongodb://id:pw@host:port/dbname');
 exports = Schema = mongoose.Schema;
